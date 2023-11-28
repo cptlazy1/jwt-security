@@ -1,5 +1,6 @@
 package com.retrogj.security.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,11 +23,20 @@ public class User implements UserDetails {
 
     @Id
     private String username;
+
     private String password;
     private String email;
+    private Boolean profileIsPrivate;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Game> games;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<GameSystem> gameSystems;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
