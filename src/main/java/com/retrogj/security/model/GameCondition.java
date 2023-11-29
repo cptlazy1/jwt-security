@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="game-conditions")
+@Table(name="game_conditions")
 public class GameCondition {
 
     @Id

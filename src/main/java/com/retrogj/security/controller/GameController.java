@@ -4,7 +4,6 @@ import com.retrogj.security.dto.GameDto;
 
 import com.retrogj.security.repository.GameRepository;
 import com.retrogj.security.service.GameService;
-import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +23,7 @@ public class GameController {
 
     // PostMapping to add game
     @PostMapping("/games")
-    public ResponseEntity<GameDto> addGame(@Valid @RequestBody GameDto dto) {
+    public ResponseEntity<GameDto> addGame(@RequestBody GameDto dto) {
         GameDto gameDto = gameService.addGame(dto);
 
         URI uri = URI.create(ServletUriComponentsBuilder
@@ -38,7 +37,7 @@ public class GameController {
 
 
     @PutMapping("/games/{id}")
-    public ResponseEntity<GameDto> updateGame(@PathVariable("id") Long gameID, @Valid @RequestBody GameDto dto)  {
+    public ResponseEntity<GameDto> updateGame(@PathVariable("id") Long gameID, @RequestBody GameDto dto)  {
         GameDto gameDto = gameService.updateGame(gameID, dto);
         return ResponseEntity.ok().body(gameDto);
     }

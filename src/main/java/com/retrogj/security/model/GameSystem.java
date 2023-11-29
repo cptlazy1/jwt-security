@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="game-systems")
+@Table(name="game_systems")
 public class GameSystem {
 
     @Id

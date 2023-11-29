@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameDto {
+public class GameSystemDto {
 
-    public Long gameID;
-    public String gameName;
-    public String gameReview;
-    public String gameRating;
+    public Long gameSystemID;
+    public String gameSystemName;
+    public String gameSystemReview;
+    public String gameSystemRating;
 
 }

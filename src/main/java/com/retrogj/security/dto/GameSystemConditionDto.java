@@ -1,5 +1,6 @@
 package com.retrogj.security.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameDto {
+public class GameSystemConditionDto {
 
-    public Long gameID;
-    public String gameName;
-    public String gameReview;
-    public String gameRating;
+    public Long gameSystemConditionID;
+    public Boolean hasBox;
+    public Boolean hasCables;
+    public Boolean isModified;
 
 }
