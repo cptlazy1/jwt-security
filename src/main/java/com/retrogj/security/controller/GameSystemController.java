@@ -45,7 +45,7 @@ public class GameSystemController {
     }
 
     // PutMapping to assign game condition to game system
-    @PutMapping("/game-systems/{gameSystemID}/condition/{gameSystemConditionID}")
+    @PutMapping("/game-systems/{gameSystemID}/game-system-conditions/{gameSystemConditionID}")
     public ResponseEntity<String> assignGameSystemCondition(@PathVariable("gameSystemID") Long gameSystemID, @PathVariable("gameSystemConditionID") Long gameSystemConditionID)  {
         gameSystemService.assignGameSystemCondition(gameSystemID, gameSystemConditionID);
         return ResponseEntity.ok().body("Game system condition assigned successfully to game system");

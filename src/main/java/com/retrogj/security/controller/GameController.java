@@ -19,7 +19,7 @@ import java.net.URI;
 public class GameController {
 
     private final GameService gameService;
-    private final GameRepository gameRepository;
+
 
     // PostMapping to add game
     @PostMapping("/games")
@@ -48,7 +48,8 @@ public class GameController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/games/{gameID}/condition/{gameConditionID}")
+    // Assign a game condition to a game
+    @PutMapping("/games/{gameID}/game-conditions/{gameConditionID}")
     public ResponseEntity<String> assignGameCondition(@PathVariable("gameID") Long gameID, @PathVariable("gameConditionID") Long gameConditionID)  {
         gameService.assignGameCondition(gameID, gameConditionID);
         return ResponseEntity.ok().body("Game condition assigned successfully to game");
