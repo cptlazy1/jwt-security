@@ -36,6 +36,7 @@ public class User implements UserDetails {
     private List<Game> games;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<GameSystem> gameSystems;
 
     @Override
