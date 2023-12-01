@@ -2,11 +2,16 @@ package com.retrogj.security.controller;
 
 import com.retrogj.security.dto.PhotoUploadResponse;
 import com.retrogj.security.service.PhotoStorageService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.method.P;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +33,24 @@ public class PhotoUpAndDownloadController {
 
         String contentType = file.getContentType();
 
-        return new PhotoUploadResponse(fileName, url, contentType);
+        return new PhotoUploadResponse(fileName, contentType, url);
     }
+
+    @GetMapping("/download/{fileName}")
+    @Transactional
+    public ResponseEntity<Resource> downloadPhoto(@PathVariable String fileName, HttpServletRequest request) {
+        Resource resource = photoStorageService.downloadPhoto(fileName);
+
+        String mimeType;
+
+        try {
+            mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment;fileName=" + resource.getFilename()).body(resource);
+    }
+
 }

@@ -22,7 +22,7 @@ public class PhotoStorageService {
     private Path photoStoragePath;
     private final String photoStorageLocation;
 
-    public PhotoStorageService(@Value("uploads") String photoStorageLocation) {
+    public PhotoStorageService(@Value("${my.upload_location}") String photoStorageLocation) {
         photoStoragePath = Paths.get(photoStorageLocation).toAbsolutePath().normalize();
         this.photoStorageLocation = photoStorageLocation;
 
@@ -52,6 +52,7 @@ public class PhotoStorageService {
 
         try {
             resource = new UrlResource(filePath.toUri());
+
     } catch (MalformedURLException e) {
         throw new RuntimeException("Issue in reading the file", e);
     }

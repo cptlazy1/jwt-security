@@ -39,6 +39,15 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<GameSystem> gameSystems;
 
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    @JoinColumn(name = "photo_id")
+    @JsonIgnore
+    private Photo photo;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
